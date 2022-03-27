@@ -175,13 +175,20 @@ import autosklearn.metrics
 
 from get_config import config
 
-print("start")
+import time
 automl = autosklearn.classification.AutoSklearnClassifier(metric=autosklearn.metrics.mean_absolute_error, logging_config=config)
+print("start", time.time())
 automl.fit(X_train, y_train)
+print(time.time())
 
-print(automl.cv_results_)
-print(automl)
-print({name: getattr(automl, name) for name in dir(automl)})
+
+def p():
+    print(automl.cv_results_)
+    print(automl)
+    print({name: getattr(automl, name) for name in dir(automl)})
+
+
+p()
 
 # parameters = {
 #     # LGBMRegressor(min_child_samples=1, min_child_weight=1.0, n_estimators=1000,
@@ -220,7 +227,11 @@ pred_mark = automl.predict(X_test)
 print(mean_absolute_error(y_test, pred_mark))
 print(r2_score(y_test, pred_mark))
 
+print("gg", time.time())
 automl.fit(data, marks)
+print(time.time())
+
+p()
 
 y_pred = pd.read_csv("sample_submission.csv", index_col=0)
 y_pred["mark"] = automl.predict(X_validation)
