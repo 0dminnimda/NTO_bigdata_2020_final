@@ -237,3 +237,5 @@ y_pred = pd.read_csv("sample_submission.csv", index_col=0)
 y_pred["mark"] = automl.predict(X_validation)
 
 y_pred.to_csv("baseline_submission.csv")
+#ya tyt bil
+#I was here
